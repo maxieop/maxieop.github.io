@@ -3,55 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Game</title>
-    <style>
-        canvas {
-            border: 1px solid black;
-            display: block;
-            margin: 0 auto;
-        }
-    </style>
+    <title>Horror Game</title>
 </head>
 <body>
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <h1>Horror Game</h1>
+    <p>Welcome to the Horror Game. Your choices will determine your fate...</p>
+
+    <div id="story">
+        <p>You find yourself standing in front of a creepy old mansion. What do you do?</p>
+        <button onclick="startGame()">Enter the mansion</button>
+        <button onclick="runAway()">Run away</button>
+    </div>
 
     <script>
-        // Define your game logic here
-        // This is just a simple example of a bouncing ball game
-        const canvas = document.getElementById("gameCanvas");
-        const ctx = canvas.getContext("2d");
-
-        let x = canvas.width / 2;
-        let y = canvas.height - 30;
-        let dx = 2;
-        let dy = -2;
-        const ballRadius = 10;
-
-        function drawBall() {
-            ctx.beginPath();
-            ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-            ctx.fillStyle = "#0095DD";
-            ctx.fill();
-            ctx.closePath();
+        function startGame() {
+            document.getElementById("story").innerHTML = "<p>You enter the mansion and hear strange noises coming from the basement. What do you do?</p><button onclick='exploreBasement()'>Explore the basement</button><button onclick='ignoreNoise()'>Ignore the noise</button>";
         }
 
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawBall();
-
-            if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
-                dx = -dx;
-            }
-
-            if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
-                dy = -dy;
-            }
-
-            x += dx;
-            y += dy;
+        function runAway() {
+            document.getElementById("story").innerHTML = "<p>You run away from the mansion, but as you look back, you see a shadowy figure watching you from the window...</p><button onclick='restartGame()'>Restart</button>";
         }
 
-        setInterval(draw, 10);
+        function exploreBasement() {
+            document.getElementById("story").innerHTML = "<p>You cautiously descend into the basement and find a hidden room. Inside, you discover an old diary that reveals the mansion's dark history...</p><button onclick='readDiary()'>Read the diary</button><button onclick='leaveBasement()'>Leave the basement</button>";
+        }
+
+        function ignoreNoise() {
+            document.getElementById("story").innerHTML = "<p>You ignore the noise and continue exploring the mansion. Suddenly, you hear footsteps behind you...</p><button onclick='turnAround()'>Turn around</button><button onclick='keepWalking()'>Keep walking</button>";
+        }
+
+        function readDiary() {
+            document.getElementById("story").innerHTML = "<p>As you read the diary, you learn about the mansion's previous owner, who conducted twisted experiments on unsuspecting victims...</p><button onclick='continueReading()'>Continue reading</button>";
+        }
+
+        function leaveBasement() {
+            document.getElementById("story").innerHTML = "<p>You decide to leave the basement and return to the main hall. Suddenly, the door slams shut behind you, trapping you inside...</p><button onclick='panic()'>Panic</button><button onclick='searchForExit()'>Search for an exit</button>";
+        }
+
+        // Additional functions and story branches can be added as needed
+
+        function restartGame() {
+            location.reload();
+        }
     </script>
 </body>
 </html>
